@@ -1,0 +1,54 @@
+<h2>Appointments</h2>
+
+<form (ngSubmit)="addAppointment()">
+  <div>
+    <label for="patientSelect">Patient:</label>
+    <select id="patientSelect" [(ngModel)]="newAppointment.patientId" name="patientId" required>
+      <option value="">Select Patient</option>
+      <option *ngFor="let patient of patients" [value]="patient.id">
+        {{patient.firstName}} {{patient.lastName}}
+      </option>
+    </select>
+  </div>
+  
+  <div>
+    <label for="doctorSelect">Doctor:</label>
+    <select id="doctorSelect" [(ngModel)]="newAppointment.doctorId" name="doctorId" required>
+      <option value="">Select Doctor</option>
+      <option *ngFor="let doctor of doctors" [value]="doctor.id">
+        {{doctor.firstName}} {{doctor.lastName}}
+      </option>
+    </select>
+  </div>
+  
+  <div>
+    <label for="appointmentDate">Appointment Date:</label>
+    <input id="appointmentDate" [(ngModel)]="newAppointment.date" name="date" type="datetime-local" required>
+  </div>
+  
+  <button type="submit">Add Appointment</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Patient</th>
+      <th>Doctor</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let appointment of appointments">
+      <td>{{appointment.id}}</td>
+      <td>{{getPatientName(appointment.patientId)}}</td>
+      <td>{{getDoctorName(appointment.doctorId)}}</td>
+      <td>{{appointment.date | date:'medium'}}</td>
+      <td>
+        <button (click)="updateAppointment(appointment)">Edit</button>
+        <button (click)="deleteAppointment(appointment.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

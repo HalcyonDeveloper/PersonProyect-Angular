@@ -1,0 +1,47 @@
+<h2>Patients</h2>
+
+<form (ngSubmit)="addPatient()">
+  <div>
+    <label for="firstName">First Name:</label>
+    <input id="firstName" [(ngModel)]="newPatient.firstName" name="firstName" placeholder="Enter first name" required>
+  </div>
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input id="lastName" [(ngModel)]="newPatient.lastName" name="lastName" placeholder="Enter last name" required>
+  </div>
+  <div>
+    <label for="phone">Phone:</label>
+    <input id="phone" [(ngModel)]="newPatient.phone" name="phone" placeholder="Enter phone number" required>
+  </div>
+  <div>
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input id="dateOfBirth" [(ngModel)]="newPatient.dateOfBirth" name="dateOfBirth" type="date" required>
+  </div>
+  <button type="submit">Add Patient</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Date of Birth</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let patient of patients">
+      <td>{{patient.id}}</td>
+      <td>{{patient.firstName}}</td>
+      <td>{{patient.lastName}}</td>
+      <td>{{patient.phone}}</td>
+      <td>{{patient.dateOfBirth | date}}</td>
+      <td>
+        <button (click)="updatePatient(patient)">Edit</button>
+        <button (click)="deletePatient(patient.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
